@@ -4,6 +4,24 @@
 
 `BytesConverter` is a C# utility class for converting bytes to other data storage units with optional rounding. It provides flexibility by allowing users to specify rounding options and decimal precision during conversion. It also includes a static method, `Convert()`, for inline conversions.
 
+## Examples
+
+```csharp
+using BytesConverter;
+
+// Class instance example
+
+var converter = new Converter(1024); // 1024 bytes
+var kilobytes = converter.Kilobyte; // Get value in kilobytes
+Console.WriteLine($"1024 bytes in kilobytes: {kilobytes} KB");
+
+// Static method example
+
+var num = 1024; // 1024 bytes
+Console.WriteLine($"1024 bytes in kilobytes: {Converter.Convert(num, Unit.KILOBYTE)} KB"); // 1.024 KB
+Console.WriteLine($"1024 bytes in kilobytes: {Converter.Convert(num, Unit.KILOBYTE, Round.ROUNDUP, 2} KB"); // 1.02 KB
+```
+
 ## Usage
 
 ### Class: Converter
@@ -36,6 +54,9 @@ The main class.
 
 - `public static double Convert(double number, Unit units)`: Convert a number to the selected data storage units.
 - `public static double Convert(double number, Unit units, Round rounding, int precision)`: Convert a number to the selected data storage units with optional rounding.
+- `private static double RoundUp`: Round a number up to the specified decimal precision.
+- `private static double RoundDown`: Round a number down to the specified decimal precision.
+- `private static double Truncate`: Truncate a number to the specified decimal precision.
   
 #### Enums
 
@@ -63,18 +84,3 @@ Represents various storage units for byte conversion.
 - `TEBIBYTE`: Represents bytes converted to tebibytes (TiB).
 - `PETABYTE`: Represents bytes converted to petabytes (PB).
 - `PEBIBYTE`: Represents bytes converted to pebibytes (PiB).
-
-## Examples
-
-```csharp
-// Class instance example
-
-var converter = new Converter(1024); // 1024 bytes
-var kilobytes = converter.Kilobyte; // Get value in kilobytes
-Console.WriteLine($"1024 bytes in kilobytes: {kilobytes} KB");
-
-// Static method example
-
-var num = 1024; // 1024 bytes
-Console.WriteLine($"1024 bytes in kilobytes: {BytesConverter.Converter.Convert(num, BytesConverter.Unit.KILOBYTE)} KB"); // 1.024 KB
-Console.WriteLine($"1024 bytes in kilobytes: {BytesConverter.Converter.Convert(num, BytesConverter.Unit.KILOBYTE, BytesConverter.Round.ROUNDUP, 2} KB"); // 1.02 KB
