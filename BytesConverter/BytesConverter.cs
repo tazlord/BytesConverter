@@ -158,43 +158,12 @@ namespace BytesConverter
         public double Pebibyte { get { return Convert(this.Bytes, Unit.PEBIBYTE, this.Rounding, this.Precision); } }
 
         /// <summary>
-        /// Convert a number to the selected data storage unit of measure.
+        /// Convert <see cref="Bytes"/> to the selected <see cref="Unit"/>.
         /// </summary>
         /// <param name="number">The number to be converted.</param>
         /// <param name="units">The desired data storage unit of measure.</param>
         /// <returns>A double precision number.</returns>
         public static double Convert(double number, Unit units)
-        {
-            return Calculate(number, units);
-        }
-
-        /// <summary>
-        /// Convert a number to the selected data storage unit of measure.
-        /// </summary>
-        /// <param name="number">The number to be converted.</param>
-        /// <param name="units">The desired data storage unit of measure.</param>
-        /// <param name="rounding">Round the result using the selected <see cref="Round"/> method (<paramref name="precision"/> must be set).</param>
-        /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
-        /// <returns>A double precision number.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
-        public static double Convert(double number, Unit units, Round rounding, int precision)
-        {
-            if ((int)rounding > 0 && precision < 0)
-            {
-                throw new ArgumentOutOfRangeException("Must set precision when rounding.");
-            }
-
-            var val = Convert(number, units);
-
-            if (rounding == Round.NONE) { return val; }
-            if (rounding == Round.ROUNDDOWN) { val = RoundDown(val, precision); }
-            if (rounding == Round.ROUNDUP) { val = RoundUp(val, precision); }
-            if (rounding == Round.TRUNCATE) { val = Truncate(val, precision); }
-
-            return val;
-        }
-
-        private static double Calculate(double number, Unit units)
         {
             double val = 0;
 
@@ -235,18 +204,62 @@ namespace BytesConverter
             return val;
         }
 
+        /// <summary>
+        /// Convert <see cref="Bytes"/> to the selected <see cref="Unit"/>.
+        /// </summary>
+        /// <param name="number">The number to be converted.</param>
+        /// <param name="units">The desired data storage unit of measure.</param>
+        /// <param name="rounding">Round the result using the selected <see cref="Round"/> method (<paramref name="precision"/> must be set).</param>
+        /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
+        /// <returns>A double precision number.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
+        public static double Convert(double number, Unit units, Round rounding, int precision)
+        {
+            if ((int)rounding > 0 && precision < 0)
+            {
+                throw new ArgumentOutOfRangeException("Must set precision when rounding.");
+            }
+
+            var val = Convert(number, units);
+
+            if (rounding == Round.NONE) { return val; }
+            if (rounding == Round.ROUNDDOWN) { val = RoundDown(val, precision); }
+            if (rounding == Round.ROUNDUP) { val = RoundUp(val, precision); }
+            if (rounding == Round.TRUNCATE) { val = Truncate(val, precision); }
+
+            return val;
+        }
+
+        /// <summary>
+        /// Round <paramref name="num"/> up to the nearest <paramref name="dec"/>.
+        /// </summary>
+        /// <param name="num">A double precision number.</param>
+        /// <param name="dec">An integer representing the resulting decimal precision.</param>
+        /// <returns>A double precision number.</returns>
         private static double RoundUp(double num, int dec)
         {
             double multiplier = Math.Pow(10, dec);
             return Math.Ceiling((num * multiplier)) / multiplier;
         }
 
+        /// <summary>
+        /// Round <paramref name="num"/> down to the nearest <paramref name="dec"/>.
+        /// </summary>
+        /// <param name="num">A double precision number.</param>
+        /// <param name="dec">An integer representing the resulting decimal precision.</param>
+        /// <returns>A double precision number.</returns>
         private static double RoundDown(double num, int dec)
         {
             double multiplier = Math.Pow(10, dec);
             return Math.Floor((num * multiplier)) / multiplier;
         }
 
+        /// <summary>
+        /// Truncate <paramref name="num"/> to the specified <paramref name="dec"/>.
+        /// </summary>
+        /// <param name="num">A double precision number.</param>
+        /// <param name="dec">An integer representing the resulting decimal precision.</param>
+        /// <returns>A double precision number.</returns>
         private static double Truncate(double num, int dec)
         {
             double multiplier = Math.Pow(10, dec);
