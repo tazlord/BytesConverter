@@ -18,6 +18,9 @@
 
 namespace BytesConverter
 {
+    /// <summary>
+    /// Conversion units.
+    /// </summary>
     public enum Unit
     {
         /// <summary>
