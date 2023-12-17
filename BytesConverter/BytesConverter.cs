@@ -158,7 +158,7 @@ namespace BytesConverter
         /// <param name="rounding">Round the result using the selected <see cref="Round"/> method (<paramref name="precision"/> must be set).</param>
         /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
         /// <returns>A double precision number.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of <paramref name="arg4"/> is less than 0.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
         public static double Convert(double number, Unit units, Round rounding, int precision)
         {
             if ((int)rounding > 0 && precision < 0)
