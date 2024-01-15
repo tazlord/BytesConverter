@@ -38,7 +38,7 @@ The main class.
 
 - `public long Bytes`: Gets or sets the bytes value to be converted.
 - `public Round Rounding`: Gets or sets the rounding type to apply during conversion.
-- `public int Precision`: Gets or sets the number of decimal places to round to.
+- `public int Precision`: Gets or sets the number of decimal places to round to (must be set when using Rounding).
 - `public double Kilobyte`: Gets the value of Bytes in Kilobytes (KB).
 - `public double Kibibyte`: Gets the value of Bytes in Kibibytes (KiB).
 - `public double Megabyte`: Gets the value of Bytes in Megabytes (MB).
