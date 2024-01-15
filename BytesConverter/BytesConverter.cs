@@ -26,8 +26,6 @@ namespace BytesConverter
     public class Converter
     {
         private long _bytes;
-        private int _precision;
-        private Round _rounding;
 
         private const long _kilobyte = 1000;
         private const long _megabyte = _kilobyte * 1000;
@@ -35,10 +33,36 @@ namespace BytesConverter
         private const long _terabyte = _gigabyte * 1000;
         private const long _petabyte = _terabyte * 1000;
         private const long _kibibyte = 1024;
+        private const long _mebibyte = _kibibyte * 1024;
         private const long _gibibyte = _mebibyte * 1024;
         private const long _tebibyte = _gibibyte * 1024;
-        private const long _mebibyte = _kibibyte * 1024;
         private const long _pebibyte = _tebibyte * 1024;
+
+        /// <summary>
+        /// Gets or sets the number of decimal places to round to.
+        /// </summary>
+        public int Precision { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rounding type to apply during conversion.
+        /// </summary>
+        public Round Rounding { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bytes value to be converted.
+        /// </summary>
+        public long Bytes
+        {
+            get { return _bytes; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Bytes value cannot be negative.");
+                }
+                _bytes = value;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter"/> class.
@@ -46,8 +70,8 @@ namespace BytesConverter
         public Converter()
         {
             this._bytes = 0;
-            this._precision = -1;
-            this._rounding = Round.NONE;
+            this.Precision = -1;
+            this.Rounding = Round.NONE;
         }
 
         /// <summary>
@@ -69,42 +93,8 @@ namespace BytesConverter
         public Converter(long bytes, Round rounding, int precision)
             : this(bytes)
         {
-            this._precision = precision;
-            this._rounding = rounding;
-        }
-
-        /// <summary>
-        /// Gets or sets the number of decimal places to round to.
-        /// </summary>
-        public int Precision
-        {
-            get {  return this._precision; }
-            set { this._precision = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the rounding type to apply during conversion.
-        /// </summary>
-        public Round Rounding
-        {
-            get { return this._rounding; }
-            set { this._rounding = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the bytes value to be converted.
-        /// </summary>
-        public long Bytes
-        {
-            get {  return _bytes; }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Bytes value cannot be negative.");
-                }
-                _bytes = value;
-            }
+            this.Precision = precision;
+            this.Rounding = rounding;
         }
 
         /// <summary>
@@ -212,12 +202,12 @@ namespace BytesConverter
         /// <param name="rounding">Round the result using the selected <see cref="Round"/> method (<paramref name="precision"/> must be set).</param>
         /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
         /// <returns>A double precision number.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
         public static double Convert(double number, Unit units, Round rounding, int precision)
         {
             if ((int)rounding > 0 && precision < 0)
             {
-                throw new ArgumentOutOfRangeException("Must set precision when rounding.");
+                throw new InvalidOperationException("Must set precision when rounding.");
             }
 
             var val = Convert(number, units);
