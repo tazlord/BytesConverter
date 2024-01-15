@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BytesConverter")]
 [assembly: AssemblyDescription("A utility class for converting bytes values to other units of measure.")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyCompany("David Sanchez")]
+[assembly: AssemblyCompany("Jose Sanchez")]
 [assembly: AssemblyProduct("BytesConverter")]
-[assembly: AssemblyCopyright("Copyright ©2023 David Sanchez")]
+[assembly: AssemblyCopyright("Copyright ©2023 Jose Sanchez")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
