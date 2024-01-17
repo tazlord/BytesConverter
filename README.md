@@ -52,11 +52,8 @@ The main class.
 
 #### Methods
 
-- `public static double Convert(double number, Unit units)`: Convert a number to the selected data storage units.
-- `public static double Convert(double number, Unit units, Round rounding, int precision)`: Convert a number to the selected data storage units with optional rounding.
-- `private static double RoundUp`: Round a number up to the specified decimal precision.
-- `private static double RoundDown`: Round a number down to the specified decimal precision.
-- `private static double Truncate`: Truncate a number to the specified decimal precision.
+- `public static double Convert(long bytes, Unit units)`: Convert bytes to the selected data storage units.
+- `public static double Convert(long bytes, Unit units, Round rounding, int precision)`: Convert bytes to the selected data storage units with optional rounding.
   
 #### Enums
 
