@@ -12,7 +12,7 @@ using BytesConverter;
 // Class instance example
 
 var converter = new Converter(1024); // 1024 bytes
-var kilobytes = converter.Kilobyte; // Get value in kilobytes
+var kilobytes = converter.Kilobyte; // 1.024 KB
 Console.WriteLine($"1024 bytes in kilobytes: {kilobytes} KB");
 
 // Static method example
@@ -30,7 +30,7 @@ The main class.
 
 #### Constructors
 
-- `public Converter()`: Initializes a new instance of the Converter class with default values.
+- `public Converter()`: Initializes a new instance of the Converter class.
 - `public Converter(long bytes)`: Initializes a new instance of the Converter class with a specified bytes value.
 - `public Converter(long bytes, Round rounding, int precision)`: Initializes a new instance of the Converter class with a specified bytes value, rounding type, and decimal places.
 
@@ -53,7 +53,7 @@ The main class.
 #### Methods
 
 - `public static double Convert(long bytes, Unit units)`: Convert bytes to the selected data storage units.
-- `public static double Convert(long bytes, Unit units, Round rounding, int precision)`: Convert bytes to the selected data storage units with optional rounding.
+- `public static double Convert(long bytes, Unit units, Round rounding, int precision)`: Convert bytes to the selected data storage units with rounding.
   
 #### Enums
 
@@ -68,7 +68,7 @@ Specifies rounding options for use in the Converter class.
 
 ##### `Unit`
 
-Represents various storage units for byte conversion.
+Represents popular storage units for bytes conversion.
 
 - `NONE`: Represents the raw bytes, no conversion (default).
 - `KILOBYTE`: Represents bytes converted to kilobytes (KB).
