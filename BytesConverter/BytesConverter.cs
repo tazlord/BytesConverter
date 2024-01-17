@@ -150,44 +150,44 @@ namespace BytesConverter
         /// <summary>
         /// Convert <see cref="Bytes"/> to the selected <see cref="Unit"/>.
         /// </summary>
-        /// <param name="number">The number to be converted.</param>
+        /// <param name="bytes">The bytes to be converted.</param>
         /// <param name="units">The desired data storage unit of measure.</param>
         /// <returns>A double precision number.</returns>
-        public static double Convert(double number, Unit units)
+        public static double Convert(long bytes, Unit units)
         {
             double val = 0;
 
             switch (units)
             {
                 case Unit.KILOBYTE:
-                    val = number / _kilobyte;
+                    val = bytes / _kilobyte;
                     break;
                 case Unit.KIBIBYTE:
-                    val = number / _kibibyte;
+                    val = bytes / _kibibyte;
                     break;
                 case Unit.MEGABYTE:
-                    val = number / _megabyte;
+                    val = bytes / _megabyte;
                     break;
                 case Unit.MEBIBYTE:
-                    val = number / _mebibyte;
+                    val = bytes / _mebibyte;
                     break;
                 case Unit.GIGABYTE:
-                    val = number / _gigabyte;
+                    val = bytes / _gigabyte;
                     break;
                 case Unit.GIBIBYTE:
-                    val = number / _gibibyte;
+                    val = bytes / _gibibyte;
                     break;
                 case Unit.TERABYTE:
-                    val = number / _terabyte;
+                    val = bytes / _terabyte;
                     break;
                 case Unit.TEBIBYTE:
-                    val = number / _tebibyte;
+                    val = bytes / _tebibyte;
                     break;
                 case Unit.PETABYTE:
-                    val = number / _petabyte;
+                    val = bytes / _petabyte;
                     break;
                 case Unit.PEBIBYTE:
-                    val = number / _pebibyte;
+                    val = bytes / _pebibyte;
                     break;
             }
 
@@ -197,20 +197,20 @@ namespace BytesConverter
         /// <summary>
         /// Convert <see cref="Bytes"/> to the selected <see cref="Unit"/>.
         /// </summary>
-        /// <param name="number">The number to be converted.</param>
+        /// <param name="bytes">The bytes to be converted.</param>
         /// <param name="units">The desired data storage unit of measure.</param>
         /// <param name="rounding">Round the result using the selected <see cref="Round"/> method (<paramref name="precision"/> must be set).</param>
         /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
         /// <returns>A double precision number.</returns>
         /// <exception cref="InvalidOperationException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
-        public static double Convert(long number, Unit units, Round rounding, int precision)
+        public static double Convert(long bytes, Unit units, Round rounding, int precision)
         {
             if ((int)rounding > 0 && precision < 0)
             {
                 throw new InvalidOperationException("Must set precision when rounding.");
             }
 
-            var val = Convert(number, units);
+            var val = Convert(bytes, units);
 
             if (rounding == Round.NONE) { return val; }
             if (rounding == Round.ROUNDDOWN) { val = RoundDown(val, precision); }
