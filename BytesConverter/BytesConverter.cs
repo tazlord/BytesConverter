@@ -203,7 +203,7 @@ namespace BytesConverter
         /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
         /// <returns>A double precision number.</returns>
         /// <exception cref="InvalidOperationException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
-        public static double Convert(double number, Unit units, Round rounding, int precision)
+        public static double Convert(long number, Unit units, Round rounding, int precision)
         {
             if ((int)rounding > 0 && precision < 0)
             {
