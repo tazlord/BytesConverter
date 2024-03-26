@@ -31,12 +31,12 @@ The main class.
 #### Constructors
 
 - `public Converter()`: Initializes a new instance of the Converter class.
-- `public Converter(long bytes)`: Initializes a new instance of the Converter class with a specified bytes value.
-- `public Converter(long bytes, Round rounding, int precision)`: Initializes a new instance of the Converter class with a specified bytes value, rounding type, and decimal places.
+- `public Converter(ulong bytes)`: Initializes a new instance of the Converter class with a specified bytes value.
+- `public Converter(ulong bytes, Round rounding, int precision)`: Initializes a new instance of the Converter class with a specified bytes value, rounding type, and decimal places.
 
 #### Properties
 
-- `public long Bytes`: Gets or sets the bytes value to be converted.
+- `public ulong Bytes`: Gets or sets the bytes value to be converted.
 - `public Round Rounding`: Gets or sets the rounding type to apply during conversion.
 - `public int Precision`: Gets or sets the number of decimal places to round to (must be set when using Rounding).
 - `public double Kilobyte`: Gets the value of Bytes in Kilobytes (KB).
@@ -49,11 +49,13 @@ The main class.
 - `public double Tibibyte`: Gets the value of Bytes in Tebibytes (TiB).
 - `public double Petabyte`: Gets the value of Bytes in Petabytes (PB).
 - `public double Pebibyte`: Gets the value of Bytes in Pebibytes (PiB).
+- `public double Exabyte`: Gets the value of Bytes in Exabytes (EB).
+- `public double Exbibyte`: Gets the value of Bytes in Exbibytes (EiB).
 
 #### Methods
 
-- `public static double Convert(long bytes, Unit units)`: Convert bytes to the selected data storage units.
-- `public static double Convert(long bytes, Unit units, Round rounding, int precision)`: Convert bytes to the selected data storage units with rounding.
+- `public static double Convert(ulong bytes, Unit units)`: Convert bytes to the selected data storage units.
+- `public static double Convert(ulong bytes, Unit units, Round rounding, int precision)`: Convert bytes to the selected data storage units with rounding.
   
 #### Enums
 
@@ -81,3 +83,5 @@ Represents popular storage units for bytes conversion.
 - `TEBIBYTE`: Represents bytes converted to tebibytes (TiB).
 - `PETABYTE`: Represents bytes converted to petabytes (PB).
 - `PEBIBYTE`: Represents bytes converted to pebibytes (PiB).
+- `EXABYTE`: Represents bytes converted to exabytes (EB).
+- `EXBIBYTE`: Represents bytes converted to exbibytes (EiB).
