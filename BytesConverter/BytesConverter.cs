@@ -25,18 +25,20 @@ namespace BytesConverter
     /// </summary>
     public class Converter
     {
-        private long _bytes;
+        private ulong _bytes;
 
-        private const long _kilobyte = 1000;
-        private const long _megabyte = _kilobyte * 1000;
-        private const long _gigabyte = _megabyte * 1000;
-        private const long _terabyte = _gigabyte * 1000;
-        private const long _petabyte = _terabyte * 1000;
-        private const long _kibibyte = 1024;
-        private const long _mebibyte = _kibibyte * 1024;
-        private const long _gibibyte = _mebibyte * 1024;
-        private const long _tebibyte = _gibibyte * 1024;
-        private const long _pebibyte = _tebibyte * 1024;
+        private const ulong _kilobyte = 1000;
+        private const ulong _megabyte = _kilobyte * 1000;
+        private const ulong _gigabyte = _megabyte * 1000;
+        private const ulong _terabyte = _gigabyte * 1000;
+        private const ulong _petabyte = _terabyte * 1000;
+        private const ulong _exabyte = _petabyte * 1000;
+        private const ulong _kibibyte = 1024;
+        private const ulong _mebibyte = _kibibyte * 1024;
+        private const ulong _gibibyte = _mebibyte * 1024;
+        private const ulong _tebibyte = _gibibyte * 1024;
+        private const ulong _pebibyte = _tebibyte * 1024;
+        private const ulong _exbibyte = _pebibyte * 1024;
 
         /// <summary>
         /// Gets or sets the number of decimal places to round to.
@@ -51,7 +53,7 @@ namespace BytesConverter
         /// <summary>
         /// Gets or sets the bytes value to be converted.
         /// </summary>
-        public long Bytes
+        public ulong Bytes
         {
             get { return _bytes; }
             set
@@ -78,7 +80,7 @@ namespace BytesConverter
         /// Initializes a new instance of the <see cref="Converter"/> class with a specified bytes value.
         /// </summary>
         /// <param name="bytes">Bytes value to be converted.</param>
-        public Converter(long bytes)
+        public Converter(ulong bytes)
             : this()
         {
             this._bytes = bytes;
@@ -90,7 +92,7 @@ namespace BytesConverter
         /// <param name="bytes">Bytes value to be converted.</param>
         /// <param name="rounding">The rounding type to apply.</param>
         /// <param name="precision">The number of decimal places to round to.</param>
-        public Converter(long bytes, Round rounding, int precision)
+        public Converter(ulong bytes, Round rounding, int precision)
             : this(bytes)
         {
             this.Precision = precision;
@@ -146,6 +148,17 @@ namespace BytesConverter
         /// Gets the value of <see cref="Bytes"/> in Pebibytes (PiB).
         /// </summary>
         public double Pebibyte { get { return Convert(this.Bytes, Unit.PEBIBYTE, this.Rounding, this.Precision); } }
+        
+        /// <summary>
+        /// Gets the value of <see cref="Bytes"/> in Exabytes (EB).
+        /// </summary>
+        public double Exabyte { get { return Convert(this.Bytes, Unit.EXABYTE, this.Rounding, this.Precision); } }
+        
+        /// <summary>
+        /// Gets the value of <see cref="Bytes"/> in Exbibytes (EiB).
+        /// </summary>
+        public double Exbibyte { get { return Convert(this.Bytes, Unit.EXBIBYTE, this.Rounding, this.Precision); } }
+
 
         /// <summary>
         /// Convert <see cref="Bytes"/> to the selected <see cref="Unit"/>.
@@ -153,7 +166,7 @@ namespace BytesConverter
         /// <param name="bytes">The bytes to be converted.</param>
         /// <param name="units">The desired data storage unit of measure.</param>
         /// <returns>A double precision number.</returns>
-        public static double Convert(long bytes, Unit units)
+        public static double Convert(ulong bytes, Unit units)
         {
             double val = 0;
 
@@ -189,6 +202,12 @@ namespace BytesConverter
                 case Unit.PEBIBYTE:
                     val = bytes / _pebibyte;
                     break;
+                case Unit.EXABYTE:
+                    val = bytes / _exabyte;
+                    break;
+                case Unit.EXBIBYTE:
+                    val = bytes / _exbibyte;
+                    break;
             }
 
             return val;
@@ -197,17 +216,17 @@ namespace BytesConverter
         /// <summary>
         /// Convert <see cref="Bytes"/> to the selected <see cref="Unit"/>.
         /// </summary>
-        /// <param name="bytes">The bytes to be converted.</param>
+        /// <param name="bytes">The bytes value to be converted.</param>
         /// <param name="units">The desired data storage unit of measure.</param>
         /// <param name="rounding">Round the result using the selected <see cref="Round"/> method (<paramref name="precision"/> must be set).</param>
         /// <param name="precision">Round to the specified number of decimal points (must be >= 0).</param>
         /// <returns>A double precision number.</returns>
         /// <exception cref="InvalidOperationException">Thrown when the value of <paramref name="precision"/> is less than 0.</exception>
-        public static double Convert(long bytes, Unit units, Round rounding, int precision)
+        public static double Convert(ulong bytes, Unit units, Round rounding, int precision)
         {
             if ((int)rounding > 0 && precision < 0)
             {
-                throw new InvalidOperationException("Must set precision when rounding.");
+                throw new InvalidOperationException("Precision requried when rounding.");
             }
 
             var val = Convert(bytes, units);

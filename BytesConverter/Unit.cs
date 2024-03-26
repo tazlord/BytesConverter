@@ -76,6 +76,16 @@ namespace BytesConverter
         /// <summary>
         /// Represents bytes converted to pebibytes (PiB).
         /// </summary>
-        PEBIBYTE
+        PEBIBYTE,
+
+        /// <summary>
+        /// Represents bytes converted to exabytes (EB).
+        /// </summary>
+        EXABYTE,
+
+        /// <summary>
+        /// Represents bytes converted to exbibytes (EiB).
+        /// </summary>
+        EXBIBYTE
     }
 }
