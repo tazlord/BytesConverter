@@ -2,7 +2,7 @@
 
 ## Overview
 
-`BytesConverter` is a C# utility class for converting bytes to other data storage units with optional rounding. It provides flexibility by allowing users to specify rounding options and decimal precision during conversion. It also includes a static method, `Convert()`, for inline conversions.
+`BytesConverter` is a C# utility class for converting bytes to other data storage units. It provides flexibility by allowing users to specify rounding options and decimal precision during conversion. It also includes a static method, `Convert()`, for inline conversions.
 
 ## Examples
 
